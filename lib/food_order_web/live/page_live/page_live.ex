@@ -12,15 +12,6 @@ defmodule FoodOrderWeb.PageLive do
     {:ok, assign(socket, :clients, clients)}
   end
 
-  def render(assigns) do
-    # IO.inspect(assigns.socket.assigns, label: "assigns")
-
-    ~H"""
-    <%= self() |> :erlang.pid_to_list() %>
-    <.live_component :for={client <- @clients} module={Client} id={client.id} client={client} />
-    """
-  end
-
   # def handle_event("add", %{"id" => id}, socket) do
   #   clients_update = fn clients ->
   #     Enum.map(clients, fn client ->
