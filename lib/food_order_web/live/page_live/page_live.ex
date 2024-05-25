@@ -1,8 +1,8 @@
 defmodule FoodOrderWeb.PageLive do
   use FoodOrderWeb, :live_view
-  alias __MODULE__.Client
+  # alias __MODULE__.Client
 
-  def mount(params, _session, socket) do
+  def mount(_params, _session, socket) do
     clients = [
       %{name: "hash", id: Ecto.UUID.generate(), value: 0},
       %{name: "hash2", id: Ecto.UUID.generate(), value: 0},
