@@ -35,7 +35,7 @@ defmodule FoodOrder.Products do
       ** (Ecto.NoResultsError)
 
   """
-  def get_Product!(id), do: Repo.get!(Product, id)
+  def get_product!(id), do: Repo.get!(Product, id)
 
   @doc """
   Creates a Product.
@@ -49,7 +49,7 @@ defmodule FoodOrder.Products do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_Product(attrs \\ %{}) do
+  def create_product(attrs \\ %{}) do
     %Product{}
     |> Product.changeset(attrs)
     |> Repo.insert()
@@ -67,7 +67,7 @@ defmodule FoodOrder.Products do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_Product(%Product{} = product, attrs) do
+  def update_product(%Product{} = product, attrs) do
     product
     |> Product.changeset(attrs)
     |> Repo.update()
@@ -85,7 +85,7 @@ defmodule FoodOrder.Products do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_Product(%Product{} = product) do
+  def delete_product(%Product{} = product) do
     Repo.delete(product)
   end
 
@@ -98,7 +98,7 @@ defmodule FoodOrder.Products do
       %Ecto.Changeset{data: %Product{}}
 
   """
-  def change_Product(%Product{} = product, attrs \\ %{}) do
+  def change_product(%Product{} = product, attrs \\ %{}) do
     Product.changeset(product, attrs)
   end
 end

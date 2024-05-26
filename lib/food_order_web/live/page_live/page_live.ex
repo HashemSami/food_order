@@ -1,6 +1,7 @@
 defmodule FoodOrderWeb.PageLive do
   use FoodOrderWeb, :live_view
   # alias __MODULE__.Client
+  alias FoodOrder.Products
 
   def mount(_params, _session, socket) do
     clients = [
@@ -9,7 +10,7 @@ defmodule FoodOrderWeb.PageLive do
       %{name: "hash3", id: Ecto.UUID.generate(), value: 0}
     ]
 
-    {:ok, assign(socket, :clients, clients)}
+    {:ok, assign(socket, clients: clients, products: Products.list_products())}
   end
 
   # def handle_event("add", %{"id" => id}, socket) do

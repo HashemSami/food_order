@@ -5,19 +5,19 @@ defmodule FoodOrder.ProductsFixtures do
   """
 
   @doc """
-  Generate a prodect.
+  Generate a product.
   """
-  def prodect_fixture(attrs \\ %{}) do
-    {:ok, prodect} =
+  def product_fixture(attrs \\ %{}) do
+    {:ok, product} =
       attrs
       |> Enum.into(%{
         description: "some description",
         name: "some name",
-        price: 42,
-        size: "some size"
+        price: 42
+        # size: "some size"
       })
-      |> FoodOrder.Products.create_prodect()
+      |> FoodOrder.Products.create_product()
 
-    prodect
+    product
   end
 end

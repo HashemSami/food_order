@@ -9,3 +9,14 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias FoodOrder.Products
+
+for _ <- 0..100,
+    do:
+      Products.create_product(%{
+        description: "some description",
+        name: "burger #{:rand.uniform(10_000)}",
+        price: :rand.uniform(10_000),
+        size: Enum.random(["SMALL", "MEDIUM", "LARGE"]),
+        image_url: "product_#{:rand.uniform(4)}.jpg"
+      })
