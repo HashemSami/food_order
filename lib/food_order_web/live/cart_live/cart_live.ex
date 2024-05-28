@@ -17,7 +17,7 @@ defmodule FoodOrderWeb.CartLive do
        <.icon name="hero-shopping-bag-solid" class="w-20 h-20 mx-auto text-orange-500 block" />
       <a
         href={~p"/"}
-        class="inline-block px-6 py-2 bg-blue-500 rounded-full text-white font-bold mt-12"
+        class="block mx-auto w-40 px-6 py-2 bg-blue-500 rounded-full text-white font-bold mt-12"
       >
         Go back
       </a>
