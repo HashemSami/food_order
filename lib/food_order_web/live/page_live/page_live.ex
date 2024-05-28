@@ -1,6 +1,6 @@
 defmodule FoodOrderWeb.PageLive do
   use FoodOrderWeb, :live_view
-  # alias __MODULE__.Client
+  alias __MODULE__.Item
   alias FoodOrder.Products
 
   def mount(_params, _session, socket) do

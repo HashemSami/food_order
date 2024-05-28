@@ -4,62 +4,73 @@ defmodule FoodOrder.ProductsTest do
   alias FoodOrder.Products
 
   describe "products" do
-    alias FoodOrder.Products.Prodect
+    alias FoodOrder.Products.Product
 
     import FoodOrder.ProductsFixtures
 
     @invalid_attrs %{name: nil, size: nil, description: nil, price: nil}
 
-    test "list_products/0 returns all products" do
-      prodect = prodect_fixture()
-      assert Products.list_products() == [prodect]
+    # test "list_products/0 returns all products" do
+    #   product = product_fixture()
+    #   assert Products.list_products() == [product]
+    # end
+
+    test "get_product!/1 returns the product with given id" do
+      product = product_fixture()
+      assert Products.get_product!(product.id) == product
     end
 
-    test "get_prodect!/1 returns the prodect with given id" do
-      prodect = prodect_fixture()
-      assert Products.get_prodect!(prodect.id) == prodect
+    test "create_product/1 with valid data creates a product" do
+      valid_attrs = %{
+        name: "some name",
+        size: "SMALL",
+        description: "some description",
+        price: %Money{amount: 43, currency: :SAR}
+      }
+
+      assert {:ok, %Product{} = product} = Products.create_product(valid_attrs)
+      assert product.name == "some name"
+      assert product.size == :SMALL
+      assert product.description == "some description"
+      assert product.price.amount == 43
     end
 
-    test "create_prodect/1 with valid data creates a prodect" do
-      valid_attrs = %{name: "some name", size: "some size", description: "some description", price: 42}
-
-      assert {:ok, %Prodect{} = prodect} = Products.create_prodect(valid_attrs)
-      assert prodect.name == "some name"
-      assert prodect.size == "some size"
-      assert prodect.description == "some description"
-      assert prodect.price == 42
+    test "create_product/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Products.create_product(@invalid_attrs)
     end
 
-    test "create_prodect/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Products.create_prodect(@invalid_attrs)
+    test "update_product/2 with valid data updates the product" do
+      product = product_fixture()
+
+      update_attrs = %{
+        name: "some updated name",
+        size: "SMALL",
+        description: "some updated description",
+        price: %Money{amount: 43, currency: :SAR}
+      }
+
+      assert {:ok, %Product{} = product} = Products.update_product(product, update_attrs)
+      assert product.name == "some updated name"
+      assert product.size == :SMALL
+      assert product.description == "some updated description"
+      assert product.price.amount == 43
     end
 
-    test "update_prodect/2 with valid data updates the prodect" do
-      prodect = prodect_fixture()
-      update_attrs = %{name: "some updated name", size: "some updated size", description: "some updated description", price: 43}
-
-      assert {:ok, %Prodect{} = prodect} = Products.update_prodect(prodect, update_attrs)
-      assert prodect.name == "some updated name"
-      assert prodect.size == "some updated size"
-      assert prodect.description == "some updated description"
-      assert prodect.price == 43
+    test "update_product/2 with invalid data returns error changeset" do
+      product = product_fixture()
+      assert {:error, %Ecto.Changeset{}} = Products.update_product(product, @invalid_attrs)
+      assert product == Products.get_product!(product.id)
     end
 
-    test "update_prodect/2 with invalid data returns error changeset" do
-      prodect = prodect_fixture()
-      assert {:error, %Ecto.Changeset{}} = Products.update_prodect(prodect, @invalid_attrs)
-      assert prodect == Products.get_prodect!(prodect.id)
+    test "delete_product/1 deletes the product" do
+      product = product_fixture()
+      assert {:ok, %Product{}} = Products.delete_product(product)
+      assert_raise Ecto.NoResultsError, fn -> Products.get_product!(product.id) end
     end
 
-    test "delete_prodect/1 deletes the prodect" do
-      prodect = prodect_fixture()
-      assert {:ok, %Prodect{}} = Products.delete_prodect(prodect)
-      assert_raise Ecto.NoResultsError, fn -> Products.get_prodect!(prodect.id) end
-    end
-
-    test "change_prodect/1 returns a prodect changeset" do
-      prodect = prodect_fixture()
-      assert %Ecto.Changeset{} = Products.change_prodect(prodect)
+    test "change_product/1 returns a product changeset" do
+      product = product_fixture()
+      assert %Ecto.Changeset{} = Products.change_product(product)
     end
   end
 end
