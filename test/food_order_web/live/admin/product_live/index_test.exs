@@ -10,10 +10,11 @@ defmodule FoodOrderWeb.Admin.ProductLive.IndexTest do
       {:ok, view, _html} = live(conn, ~p"/admin/products")
 
       assert has_element?(view, "header>div>h1", "List Products")
+      # open_browser(view)
     end
   end
 
   def create_product(opts) do
-    IO.inspect(opts)
+    %{product: product_fixture()}
   end
 end

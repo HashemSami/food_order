@@ -1,0 +1,20 @@
+<.header>
+  List Products
+</.header>
+
+<%!-- <table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr :for={product <- @products} id={"#{product.id}"}>
+      <td><%= product.name %></td>
+    </tr>
+  </tbody>
+</table> --%>
+<.table id="products" rows={@products}>
+  <:col :let={product} label="name"><%= product.name %></:col>
+</.table>
