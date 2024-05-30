@@ -12,3 +12,7 @@
   
   <:col :let={product} label="size"><%= product.size %></:col>
 </.table>
+
+<.modal :if={@live_action == :new} id="new-product-modal">
+  New product modal
+</.modal>
