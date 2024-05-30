@@ -1,8 +1,11 @@
 <.header>
   List Products
+  <:actions>
+    <.link patch={~p"/admin/products/new"}> New Product</.link>
+  </:actions>
 </.header>
 
-<.table id="products" rows={@products}>
+<.table id="products" rows={@products} row_id={fn p -> "products-#{p.id}" end}>
   <:col :let={product} label="name"><%= product.name %></:col>
   
   <:col :let={product} label="price"><%= product.price %></:col>

@@ -5,7 +5,6 @@ defmodule FoodOrderWeb.PageLiveTest do
 
   test "Load main hero HTML", %{conn: conn} do
     {:ok, view, _html} = live(conn, ~p"/")
-    # IO.inspect(view)
 
     hero_cta = "[data-role=hero-cta]"
 
@@ -29,7 +28,7 @@ defmodule FoodOrderWeb.PageLiveTest do
 
     product_item = "[data-role=item][data-id=#{product.id}]"
 
-    assert element(view, product_item) |> render() |> IO.inspect()
+    assert element(view, product_item) |> render()
     assert has_element?(view, product_item)
     assert has_element?(view, product_item <> ">img")
     assert has_element?(view, product_item, product.name)
