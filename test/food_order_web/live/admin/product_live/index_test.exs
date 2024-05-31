@@ -31,7 +31,7 @@ defmodule FoodOrderWeb.Admin.ProductLive.IndexTest do
       # open_browser(view)
     end
 
-    test "Add new product", %{conn: conn, product: product} do
+    test "Add new product", %{conn: conn, product: _product} do
       {:ok, view, _html} = live(conn, ~p"/admin/products")
 
       assert view
@@ -40,10 +40,14 @@ defmodule FoodOrderWeb.Admin.ProductLive.IndexTest do
 
       assert_patch(view, ~p"/admin/products/new")
       assert view |> has_element?("#new-product-modal")
+
+      assert view
+             |> form("#product-form", product: %{})
+             |> render_change() =~ "blank"
     end
   end
 
-  def create_product(opts) do
+  def create_product(_opts) do
     %{product: product_fixture()}
   end
 end
