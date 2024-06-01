@@ -1,0 +1,6 @@
+esbuild
+msgid
+msgstr
+gettext
+Ecto
+قائمة

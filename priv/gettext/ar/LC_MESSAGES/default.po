@@ -1,0 +1,6 @@
+msgid "Hello, %{name}!"
+msgstr "أهلا وسهلا %{name}!"
+
+
+msgid "List Products"
+msgstr "قائمة المنتجات"
