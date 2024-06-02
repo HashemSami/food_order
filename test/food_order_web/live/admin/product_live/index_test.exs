@@ -59,7 +59,7 @@ defmodule FoodOrderWeb.Admin.ProductLive.IndexTest do
         |> follow_redirect(conn, ~p"/admin/products")
 
       assert html =~ "Product created successfully"
-      assert html =~ "Product 1 NAme"
+      assert html =~ "Product Name"
     end
   end
 

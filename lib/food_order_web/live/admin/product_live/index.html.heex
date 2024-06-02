@@ -19,5 +19,11 @@
   show
   on_cancel={JS.navigate(~p"/admin/products")}
 >
-  <.live_component module={Form} id="new-product-form" title={@page_title} product={@product} />
+  <.live_component
+    module={Form}
+    id="new-product-form"
+    title={@page_title}
+    product={@product}
+    navigate={~p"/admin/products"}
+  />
 </.modal>

@@ -3,7 +3,19 @@ defmodule FoodOrderWeb.PageLiveTest do
   import Phoenix.LiveViewTest
   import FoodOrder.ProductsFixtures
 
+  test "Print main hero HTML", %{conn: conn} do
+    {:ok, view, _html} = live(conn, ~p"/")
+
+    hero_cta = "[data-role=hero-cta]"
+
+    assert has_element?(view, "[data-role=hero]")
+    assert has_element?(view, hero_cta)
+
+    assert view |> element(hero_cta <> ">h6") |> render() =~ "Make Your Order"
+  end
+
   test "Load main hero HTML", %{conn: conn} do
+    IO.inspect(conn)
     {:ok, view, _html} = live(conn, ~p"/")
 
     hero_cta = "[data-role=hero-cta]"

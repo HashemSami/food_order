@@ -3,9 +3,9 @@ defmodule FoodOrderWeb.Admin.ProductLive.Form do
   alias FoodOrder.Products
   use FoodOrderWeb, :live_component
 
-  def update(%{product: product} = ass, socket) do
+  def update(%{product: product} = assigns, socket) do
     changeset = Products.change_product(product)
-    {:ok, socket |> assign(form: to_form(changeset))}
+    {:ok, socket |> assign(assigns) |> assign(form: to_form(changeset))}
   end
 
   def render(assigns) do
@@ -23,7 +23,7 @@ defmodule FoodOrderWeb.Admin.ProductLive.Form do
         <.input field={@form[:price]} type="number" label="Price" />
         <.input field={@form[:size]} label="Size" />
         <:actions>
-          <.button phx-diable-with="Saving...">Create Product</.button>
+          <.button phx-disable-with="Saving...">Create Product</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -42,14 +42,16 @@ defmodule FoodOrderWeb.Admin.ProductLive.Form do
   def handle_event("save", %{"product" => params}, socket) do
     case Products.create_product(params) do
       {:ok, _} ->
-        socket = socket |> put_flash(:info, "Product created successfully")
+        socket =
+          socket
+          |> put_flash(:info, "Product created successfully")
+          |> push_navigate(to: socket.assigns.navigate)
+
         {:noreply, socket}
 
       {:error, changeset} ->
         {:noreply, assign_form(socket, changeset)}
     end
-
-    {:noreply, socket}
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
