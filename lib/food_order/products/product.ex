@@ -17,6 +17,14 @@ defmodule FoodOrder.Products.Product do
   def changeset(product, attrs) do
     product
     |> cast(attrs, [:name, :price, :size, :description, :image_url])
+    |> validate_money(:price)
     |> validate_required([:name, :price, :size, :description])
+  end
+
+  defp validate_money(changeset, field) do
+    validate_change(changeset, field, fn
+      _, %Money{amount: amount} when amount > 0 -> []
+      _, _ -> [amount: "must be greater than 0"]
+    end)
   end
 end
