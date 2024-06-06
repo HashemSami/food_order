@@ -51,7 +51,11 @@ defmodule FoodOrder.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
-      {:money, "~> 1.12"}
+      # {:money, "~> 1.12"},
+      # LOCALE
+      {:ex_cldr, "~> 2.37"},
+      {:ex_money, "~> 5.0"},
+      {:ex_money_sql, "~> 1.0"}
     ]
   end
 
