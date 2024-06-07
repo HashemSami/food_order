@@ -61,8 +61,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :money,
-  default_currency: :SAR
+# config :money,
+#   default_currency: :SAR
+
+config :ex_money, default_cldr_backend: FoodOrder.Cldr
 
 config :gettext, :default_locale, "ar"
 

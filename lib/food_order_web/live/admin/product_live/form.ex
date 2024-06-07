@@ -30,8 +30,13 @@ defmodule FoodOrderWeb.Admin.ProductLive.Form do
     """
   end
 
+  def get_money(%{"price" => ""} = params),
+    do: Map.update(params, "price", 0, fn _ -> Money.new(:USD, 0) end)
+
   def get_money(params) do
-    Map.update(params, "price", nil, fn price -> Money.new(String.to_integer(price)) end)
+    IO.inspect(params)
+
+    Map.update(params, "price", Money.new(:USD, 0), fn price -> Money.new(:USD, price) end)
   end
 
   def handle_event("validate", %{"product" => params}, socket) do
@@ -47,8 +52,8 @@ defmodule FoodOrderWeb.Admin.ProductLive.Form do
   end
 
   def handle_event("save", %{"product" => params}, socket) do
-    # params =
-    #   Map.update(params, "price", nil, fn price -> Money.new(String.to_integer(price)) end)
+    params = get_money(params)
+    IO.inspect(params)
 
     case Products.create_product(params) do
       {:ok, _} ->

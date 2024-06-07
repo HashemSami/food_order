@@ -3,17 +3,17 @@ defmodule FoodOrder.Repo.Migrations.CreateProducts do
 
   def change do
     up_query = """
-    CREATE TYPE public.money_with_currency AS (amount integer, currency varchar(3))
+    CREATE TYPE public.money_with_currency AS (currency_code varchar, amount numeric);
     """
 
     down_query = """
-    DROP TYPE public.money_with_currency
+    DROP TYPE public.money_with_currency;
     """
 
     execute(up_query, down_query)
 
-    create_query = "CREATE TYPE sizes as ENUM('SMALL', 'MEDIUM', 'LARGE')"
-    drop_query = "DROP TYPE sizes"
+    create_query = "CREATE TYPE public.sizes as ENUM('SMALL', 'MEDIUM', 'LARGE')"
+    drop_query = "DROP TYPE public.sizes"
     execute(create_query, drop_query)
 
     create table(:products) do

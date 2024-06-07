@@ -16,7 +16,7 @@ for _ <- 0..100,
       Products.create_product(%{
         description: "some description",
         name: "burger #{:rand.uniform(10_000)}",
-        price: Money.new(:rand.uniform(10_000)),
+        price: Money.new(:SAR, :rand.uniform(10_000)),
         size: Enum.random(["SMALL", "MEDIUM", "LARGE"]),
         image_url: "product_#{:rand.uniform(4)}.jpg"
       })
